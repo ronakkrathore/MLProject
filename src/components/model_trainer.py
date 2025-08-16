@@ -43,13 +43,45 @@ class ModelTrainer:
                 "Decision Tree": DecisionTreeRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
                 "Linear Regression": LinearRegression(),
-                "K-Neighbors Classifier": KNeighborsRegressor(),
-                "XGBClassifier": XGBRegressor(),
-                "CatBoosting Classifier": CatBoostRegressor(verbose=False),
-                "AdaBoost Classifier": AdaBoostRegressor(),
+                "K-Neighbors Regressor": KNeighborsRegressor(),
+                "XGBRegressor": XGBRegressor(),
+                "CatBoosting Regressor": CatBoostRegressor(verbose=False),
+                "AdaBoost Regressor": AdaBoostRegressor(),
+            }
+            params = {
+                "Random Forest": {
+                    "n_estimators": [100, 200, 500],
+                },
+                "Decision Tree": {
+                    "criterion": ["squared_error", "friedman_mse", "absolute_error", "poisson"],
+                },
+                "Gradient Boosting": {
+                    "n_estimators": [100, 200, 500],
+                    "learning_rate": [0.01, 0.05, 0.1, 0.2],
+                    "subsample": [0.8, 1.0],
+                },
+                "Linear Regression": {},
+                "K-Neighbors Regressor": {
+                    "n_neighbors": [3, 5, 7, 9],
+                },
+                "XGBRegressor": {
+                    "n_estimators": [100, 200, 500],
+                    "learning_rate": [0.01, 0.05, 0.1, 0.2],
+                },
+                "CatBoosting Regressor": {
+                    "iterations": [200, 500, 1000],
+                    "learning_rate": [0.01, 0.05, 0.1],
+                    "depth": [4, 6, 8, 10],
+                },
+                "AdaBoost Regressor": {
+                    "n_estimators": [50, 100, 200, 500],
+                    "learning_rate": [0.01, 0.05, 0.1, 1.0],
+                    "loss": ["linear", "square", "exponential"]
+                }
             }
 
-            model_report:dict=evaluate_model(x_train=x_train, y_train=y_train,x_test=x_test, y_test=y_test,models=models)
+
+            model_report:dict=evaluate_model(x_train=x_train, y_train=y_train,x_test=x_test, y_test=y_test,models=models, params=params)
 
             best_model_score = max(sorted(model_report.values()))
 
