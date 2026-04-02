@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ML models
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Data (adjust as needed)
+data/raw/
+# ML models
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Data (adjust as needed)
+data/raw/
+
